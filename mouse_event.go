@@ -4,18 +4,16 @@ import (
 	"golang.org/x/mobile/event/mouse"
 )
 
-func NewMouseEvent(event mouse.Event) MouseEvent {
+func NewMouseEvent(event mouse.Event) MouseStateEvent {
 	return &mouseState{event}
 }
 
 type mouseState struct {
 	mouse.Event
 }
-type MouseEventListener interface {
-	OnMouseEvent(mouseChannel <-chan MouseEvent)
-}
 
-type MouseEvent interface {
+type MouseStateEvent interface {
+	MouseEvent
 	GetCursorPoint() CursorPoint
 	IsWheel() bool
 	IsReleased(button mouse.Button) bool

@@ -1,5 +1,7 @@
 package bus
 
+type drawEvent struct{}
+
 ///// Constructors //////////////////
 
 func NewDrawLayersEvent() DrawLayersEvent {
@@ -12,10 +14,6 @@ func NewDrawEvent() DrawEvent {
 }
 
 /////////////////////////////////////
-
-type DrawEventListener interface {
-	OnDrawEvent(drawChannel <-chan DrawEvent)
-}
 
 type ImageLayerData struct {
 	LayerMetadata []*ImageMetadata `yaml:"LayerMetadata"`
@@ -31,11 +29,6 @@ type ImageMetadata struct {
 	Height         int32  `yaml:"Height"`
 	HorizontalFlip bool   `yaml:"HorizontalFlip"`
 }
-
-// /////////// DrawEvent and the drawEvent struct are no-ops or signaling at best.
-type DrawEvent interface {
-}
-type drawEvent struct{}
 
 /////////////////////////////////////////////////
 

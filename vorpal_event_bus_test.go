@@ -4,7 +4,6 @@ import (
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/mobile/event/key"
 	"golang.org/x/mobile/event/mouse"
-	"os"
 	"testing"
 	"time"
 )
@@ -72,10 +71,6 @@ func (t *bus_test) OnTextEvent(channel <-chan TextEvent) {
 func (t *bus_test) OnKeyEvent(channel <-chan KeyEvent) {
 	for evt := range channel {
 		t.keyEvent = evt
-		if evt.EqualsIgnoreCase('e') {
-			os.Exit(0)
-		}
-
 	}
 
 }

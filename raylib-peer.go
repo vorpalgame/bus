@@ -14,7 +14,7 @@ type RaylibPeerController interface {
 	DrawEventListener
 	AudioEventListener
 	TextEventListener
-	KeysRegistrationEventListener
+	KeysRegistrationListener
 	ControlEventListener
 	GetControlEvents() []ControlEvent
 	GetDrawEvent() DrawEvent

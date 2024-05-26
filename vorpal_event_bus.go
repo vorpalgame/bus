@@ -18,7 +18,7 @@ type VorpalBus interface {
 	AddDrawListener(eventListener DrawEventListener)
 	AddAudioListener(eventListener AudioEventListener)
 	AddTextListener(eventListener TextEventListener)
-	AddKeysListener(eventListener KeysRegistrationEventListener)
+	AddKeysListener(eventListener KeysRegistrationListener)
 	AddControlListener(eventListener ControlEventListener)
 
 	SendMouseEvent(event MouseEvent)
@@ -57,7 +57,7 @@ func (bus *vorpalEventBus) SendControlEvent(event ControlEvent) {
 		channel <- event
 	}
 }
-func (bus *vorpalEventBus) AddKeysListener(eventListener KeysRegistrationEventListener) {
+func (bus *vorpalEventBus) AddKeysListener(eventListener KeysRegistrationListener) {
 	listenerChannel := make(chan KeysRegistrationEvent, 10)
 	bus.keysRegistrationEventListenerChannel = append(bus.keysRegistrationEventListenerChannel, listenerChannel)
 	go eventListener.OnKeyRegistrationEvent(listenerChannel)

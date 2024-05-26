@@ -6,6 +6,16 @@ import (
 	"golang.org/x/mobile/event/key"
 )
 
+// /////////// Key registration and event listener....
+type KeysRegistrationListener interface {
+	OnKeyRegistrationEvent(keyRegistrationChannel <-chan KeysRegistrationEvent)
+}
+
+// ////////////////////////////////////////////////////////////////////
+type KeysRegistrationEvent interface {
+	GetRunes() []rune
+}
+
 func NewKeyEvent(key key.Event) KeyEvent {
 	return &keyEvent{key}
 }
@@ -15,16 +25,13 @@ func NewKeyRegistrationEvent(keys []rune) KeysRegistrationEvent {
 	return &keysRegistrationEvent{keys}
 }
 
-type KeysRegistrationEventListener interface {
-	OnKeyRegistrationEvent(keyRegistrationChannel <-chan KeysRegistrationEvent)
-}
-type KeyEventListener interface {
-	OnKeyEvent(keyChannel <-chan KeyEvent)
-}
-
-// ////////////////////////////////////////////////////////////////////
-type KeysRegistrationEvent interface {
-	GetRunes() []rune
+type KeyStateEvent interface {
+	KeyEvent
+	ToRune() rune
+	Equals(keyRune rune) bool
+	EqualsIgnoreCase(keyRune rune) bool
+	IsPressed() bool
+	IsReleased() bool
 }
 type keysRegistrationEvent struct {
 	runes []rune
@@ -32,14 +39,6 @@ type keysRegistrationEvent struct {
 
 func (k *keysRegistrationEvent) GetRunes() []rune {
 	return k.runes
-}
-
-type KeyEvent interface {
-	ToRune() rune
-	Equals(keyRune rune) bool
-	EqualsIgnoreCase(keyRune rune) bool
-	IsPressed() bool
-	IsReleased() bool
 }
 
 func (k *keyEvent) IsPressed() bool {
