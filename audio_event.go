@@ -1,10 +1,23 @@
 package bus
 
-//Having to return the struct instead of the interface is an unfortunate
-//side effect of the YAML marshaling.
+//This a common set of implementations but isn't required. The user simply needs to add AudioEvent to
+//whatever interface they create so the bus can pass it.
 
 func NewAudioState(fileName string, loop bool) AudioState {
 	return &AudioStateData{fileName, loop, 0}
+}
+
+/////PlayAudioEvent
+//Need to ensure there is asymmetery in events/implementations they can be
+//distinguished by the case switch.
+
+type PlayAudioEvent interface {
+	AudioEvent
+	GetAudioFile() string
+	IsLoop() bool
+}
+type StopAudioEvent interface {
+	AudioEvent
 }
 
 type AudioState interface {
@@ -57,16 +70,6 @@ func NewStopAudioEvent(state AudioState) StopAudioEvent {
 	return &stopAudioEventData{state.GetAudioFile()}
 }
 
-/////PlayAudioEvent
-//Need to ensure there is asymmetery in events/implementations they can be
-//distinguished by the case switch.
-
-type PlayAudioEvent interface {
-	AudioEvent
-	GetAudioFile() string
-	IsLoop() bool
-}
-
 type playAudioEventData struct {
 	fileName string
 	isLoop   bool
@@ -81,10 +84,6 @@ func (p *playAudioEventData) IsLoop() bool {
 }
 
 /////StopAudioEvent
-
-type StopAudioEvent interface {
-	AudioEvent
-}
 
 type stopAudioEventData struct {
 	fileName string

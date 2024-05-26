@@ -86,8 +86,6 @@ func (c *raylibPeerController) GetControlEvents() []ControlEvent {
 }
 
 func (c *raylibPeerController) GetTextEvent() TextEvent {
-	//temp := c.textEvent
-	//c.textEvent = nil
 	return c.textEvent
 }
 

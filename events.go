@@ -1,5 +1,8 @@
 package bus
 
+// /The bus and the event/listener interfaces are all that are absolutely
+// required. If the user wishes to create custom text, control, draw, etc. events
+// they simply have to add the relevant interface to their own interface(s)
 type TextEvent interface{}
 
 type TextEventListener interface {

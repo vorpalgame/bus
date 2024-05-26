@@ -7,6 +7,7 @@ import (
 )
 
 // /////////// Key registration and event listener....
+// The peer class uses this to listen for what evnts the
 type KeysRegistrationListener interface {
 	OnKeyRegistrationEvent(keyRegistrationChannel <-chan KeysRegistrationEvent)
 }

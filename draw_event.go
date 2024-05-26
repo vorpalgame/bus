@@ -1,5 +1,15 @@
 package bus
 
+// Common functionality as a usable example but the user can creat their own
+// draw events by simply adding the interface DrawEvent so that the bus can distinguish.
+// The receiver can switch on the type.
+type DrawLayersEvent interface {
+	DrawEvent
+	Reset()
+	GetImageLayers() []ImageLayerData
+	AddImageLayer(imgLayer ImageLayerData) DrawEvent
+}
+
 type drawEvent struct{}
 
 ///// Constructors //////////////////
@@ -32,13 +42,6 @@ type ImageMetadata struct {
 
 /////////////////////////////////////////////////
 
-type DrawLayersEvent interface {
-	DrawEvent
-	Reset()
-	GetImageLayers() []ImageLayerData
-	AddImageLayer(imgLayer ImageLayerData) DrawEvent
-}
-
 type drawLayerEvent struct {
 	imageLayers []ImageLayerData
 }
@@ -49,7 +52,6 @@ func (evt *drawLayerEvent) Reset() {
 
 func (evt *drawLayerEvent) AddImageLayer(img ImageLayerData) DrawEvent {
 	evt.imageLayers = append(evt.imageLayers, img)
-
 	return evt
 }
 

@@ -1,6 +1,7 @@
 package bus
 
-//////////
+//Common control events like window size and title. These are not require. The user can
+//create their own control events by adding the ControlEvent interface to their own.
 
 // /////WindowTitleEvent//////
 func NewWindowTitleEvent(data string) ControlEvent {
