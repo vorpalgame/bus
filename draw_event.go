@@ -17,6 +17,21 @@ type DrawEventListener interface {
 	OnDrawEvent(drawChannel <-chan DrawEvent)
 }
 
+type ImageLayerData struct {
+	LayerMetadata []*ImageMetadata `yaml:"LayerMetadata"`
+}
+
+/////////////////////////////////////////////////////////////////////////
+
+type ImageMetadata struct {
+	ImageFileName  string `yaml:"ImageFileName"`
+	X              int32  `yaml:"X"`
+	Y              int32  `yaml:"Y"`
+	Width          int32  `yaml:"Width"`
+	Height         int32  `yaml:"Height"`
+	HorizontalFlip bool   `yaml:"HorizontalFlip"`
+}
+
 // /////////// DrawEvent and the drawEvent struct are no-ops or signaling at best.
 type DrawEvent interface {
 }
