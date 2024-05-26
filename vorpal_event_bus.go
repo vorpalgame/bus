@@ -36,11 +36,11 @@ func GetVorpalBus() VorpalBus {
 	return &eb
 }
 
-// Channels that can buffer multiple events or where we don't care for only the latest
+// Channels that can buffer multiple events or where we care for just the latest
 // event. For example, if the 10 mouse events are sent but the consumer is only concerned
 // with the last one, they can ignore all but the last. We don't want to block the caller.
 //
-// These also give the consumer the choice whether to igonre or process all the events. If there are
+// These also give the consumer the choice whether to ignore or process all the events. If there are
 // multiple DrawEvents we may wish to process them al in one context while ignore all but the latest
 // and consider the earlier  ones to be frame misses.
 // The controller determines correct behavior
